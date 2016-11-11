@@ -1,0 +1,75 @@
+[
+  {
+    "model": "records.hashTag",
+    "pk": 1,
+    "fields": {
+      "name": "new year"
+    }
+  },
+  {
+    "model": "records.hashTag",
+    "pk": 2,
+    "fields": {
+      "name": "christmas"
+    }
+  },
+  {
+    "model": "records.hashTag",
+    "pk": 3,
+    "fields": {
+      "name": "wedding"
+    }
+  },
+  {
+    "model": "records.album",
+    "pk": 1,
+    "fields": {
+      "name": "Black & Blue",
+      "tags": [3]
+    }
+  },
+  {
+    "model": "records.album",
+    "pk": 2,
+    "fields": {
+      "name": "Tribute",
+      "tags": [1]
+    }
+  },
+  {
+    "model": "records.track",
+    "pk": 1,
+    "fields": {
+      "album": 1,
+      "name": "As Long As You Love Me",
+      "duration": "04:00"
+    }
+  },
+  {
+    "model": "records.track",
+    "pk": 2,
+    "fields": {
+      "album": 1,
+      "name": "I Want It That Way",
+      "duration": "04:00"
+    }
+  },
+  {
+    "model": "records.track",
+    "pk": 3,
+    "fields": {
+      "album": 2,
+      "name": "Smooth Criminal",
+      "duration": "04:00"
+    }
+  },
+  {
+    "model": "records.track",
+    "pk": 4,
+    "fields": {
+      "album": 2,
+      "name": "Billy Jeans",
+      "duration": "04:00"
+    }
+  }
+]

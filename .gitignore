@@ -1,0 +1,6 @@
+/.idea
+/env
+studio-django-graphql.iml
+
+/**/__pycache__
+*.sqlite3
