@@ -81,7 +81,7 @@ DATABASES = {
 
 # GraphQL
 GRAPHENE = {
-    'SCHEMA': 'records.schema.schema'
+    'SCHEMA': 'studio.schema.schema'
 }
 
 # Password validation

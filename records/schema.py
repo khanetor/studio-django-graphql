@@ -28,7 +28,7 @@ class AlbumType(graphene.ObjectType):
         return self.tags.all()
 
 
-class QueryType(graphene.ObjectType):
+class QueryType(graphene.AbstractType):
     album = graphene.Field(
         AlbumType,
         id=graphene.Int()
@@ -44,6 +44,3 @@ class QueryType(graphene.ObjectType):
 
     def resolve_albums(self, args, context, info):
         return Album.objects.all()
-
-
-schema = graphene.Schema(query=QueryType)
