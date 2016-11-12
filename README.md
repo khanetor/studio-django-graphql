@@ -21,7 +21,7 @@ INSTALLED_APPS = [
 ]
 
 GRAPHENE = {
-    'SCHEMA': 'records.schema.schema'
+    'SCHEMA': 'studio.schema.schema'
 }
 ```
 
@@ -29,24 +29,20 @@ After setting up, you can browse to `http://localhost:8000/graphql/` to try out 
 
 Sample graph query:
 ```
-{
-  album(id: 1) {
-    name
-    date
-    tags {
-      name
-    }
-    tracks {
-      name
-      duration
-    }
-  }
-  
+{ 
   albums {
-    name
-    date
-    tags {
-      name
+    edges {
+      node {
+        name
+        date
+        tags {
+          edges {
+            node {
+              name  
+            }
+          }
+        }  
+      }
     }
   }
 }
@@ -55,5 +51,3 @@ Sample graph query:
 #### Concerns
 - Performance might not be as optimized as traditional rest API, because there might be multiple queries issues when
 querying nested related objects.
-- There are other way to integrate Django models with GraphQL Type, but I found them not working with
-Django 1.10 at the moment.

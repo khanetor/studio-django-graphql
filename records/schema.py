@@ -1,46 +1,33 @@
 import graphene
-from .models import Album
+from graphene import relay
+import graphene_django
+from graphene_django import filter
+
+from .models import Album, Track, HashTag
 
 
-class TagType(graphene.ObjectType):
-    name = graphene.String()
+class TagType(graphene_django.DjangoObjectType):
+    class Meta:
+        model = HashTag
+        interfaces = (relay.Node,)
 
 
-class TrackType(graphene.ObjectType):
-    name = graphene.String()
-    duration = graphene.String()
+class TrackNode(graphene_django.DjangoObjectType):
+    duration = graphene.String()  # Should be removed once Graphene is updated
+
+    class Meta:
+        model = Track
+        interfaces = (relay.Node,)
 
 
-class AlbumType(graphene.ObjectType):
-    name = graphene.String()
-    date = graphene.types.datetime.DateTime()
-    tracks = graphene.List(
-        TrackType
-    )
-    tags = graphene.List(
-        TagType
-    )
-
-    def resolve_tracks(self, args, context, info):
-        return self.track_set.all()
-
-    def resolve_tags(self, args, context, info):
-        return self.tags.all()
+class AlbumNode(graphene_django.DjangoObjectType):
+    class Meta:
+        model = Album
+        interfaces = (relay.Node,)
 
 
 class QueryType(graphene.AbstractType):
-    album = graphene.Field(
-        AlbumType,
-        id=graphene.Int()
-    )
-
-    albums = graphene.List(
-        AlbumType
-    )
-
-    def resolve_album(self, args, context, info):
-        id = args.get('id')
-        return Album.objects.get(pk=id)
-
-    def resolve_albums(self, args, context, info):
-        return Album.objects.all()
+    album = relay.Node.Field(AlbumNode)
+    albums = filter.DjangoFilterConnectionField(AlbumNode)
+    track = relay.Node.Field(TrackNode)
+    tracks = filter.DjangoFilterConnectionField(TrackNode)

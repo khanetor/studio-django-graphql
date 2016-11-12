@@ -13,7 +13,7 @@ class Album(models.Model):
 
 
 class Track(models.Model):
-    album = models.ForeignKey(Album)
+    album = models.ForeignKey(Album, related_name='tracks')
     name = models.CharField(max_length=50)
     duration = models.DurationField()
     tags = models.ManyToManyField(HashTag, blank=True)
